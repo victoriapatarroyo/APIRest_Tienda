@@ -1,7 +1,6 @@
 package com.tienda.victoria.service;
 
 import com.tienda.victoria.dto.ClienteDTO;
-import com.tienda.victoria.exception.ResourceNotFoundException;
 import com.tienda.victoria.model.Cliente;
 import com.tienda.victoria.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +24,13 @@ public class ClienteService {
     }
 
     // Buscar cliente por ID
-    /*public ClienteDTO buscarPorId(Integer id) {
-        Optional<Cliente> cliente = clienteRepository.findById(id);
-        if (cliente.isPresent()) {
-            return convertirADTO(cliente.get());
-        }
-        throw new RuntimeException("Cliente no encontrado con ID: " + id);
-    }*/
     public ClienteDTO buscarPorId(Integer id) {
         Optional<Cliente> cliente = clienteRepository.findById(id);
         if (cliente.isPresent()) {
             return convertirADTO(cliente.get());
         }
-        throw new ResourceNotFoundException("Cliente no encontrado con ID: " + id);
+        throw new RuntimeException("Cliente no encontrado con ID: " + id);
     }
-
 
     // Guardar nuevo cliente
     public ClienteDTO guardarCliente(ClienteDTO clienteDTO) {
