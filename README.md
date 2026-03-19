@@ -483,21 +483,21 @@ Base URL: `http://localhost:8080/api/clientes`
 
 ```sql
 CREATE TABLE IF NOT EXISTS `cliente` (
-  `idCliente`       INT NOT NULL AUTO_INCREMENT,
-  `nombreCliente`   VARCHAR(50) NOT NULL,
-  `apellidoCliente` VARCHAR(50) NOT NULL,
-  `tipoDocumento`   VARCHAR(20) NOT NULL,
-  `numeroDocumento` VARCHAR(20) NOT NULL,
-  `telefonoCliente` VARCHAR(15) NOT NULL,
-  `correoCliente`   VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`idCliente`)
+  `id_cliente`       INT NOT NULL AUTO_INCREMENT,
+  `nombre_cliente`   VARCHAR(50) NOT NULL,
+  `apellido_cliente` VARCHAR(50) NOT NULL,
+  `tipo_documento`   VARCHAR(20) NOT NULL,
+  `numero_documento` VARCHAR(20) NOT NULL,
+  `telefono_cliente` VARCHAR(15) NOT NULL,
+  `correo_cliente`   VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id_cliente`)
 );
 ```
 
 ### Datos de prueba
 
 ```sql
-INSERT INTO `cliente` (`nombreCliente`, `apellidoCliente`, `tipoDocumento`, `numeroDocumento`, `telefonoCliente`, `correoCliente`) VALUES
+INSERT INTO `cliente` (`nombre_cliente`, `apellido_cliente`, `tipo_documento`, `numero_documento`, `telefono_cliente`, `correo_cliente`) VALUES
 ('Juan',      'Pérez',     'CC', '123456789', '3001234567', 'juan.perez@gmail.com'),
 ('María',     'González',  'CC', '987654321', '3109876543', 'maria.gonzalez@gmail.com'),
 ('Carlos',    'Rodríguez', 'CC', '456789123', '3204567891', 'carlos.rodriguez@gmail.com'),
@@ -516,7 +516,7 @@ INSERT INTO `cliente` (`nombreCliente`, `apellidoCliente`, `tipoDocumento`, `num
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/victoriapatarroyo/victoria.git
+git clone https://github.com/victoriapatarroyo/APIRest_Tienda.git
 cd victoria
 ```
 
