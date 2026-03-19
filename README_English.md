@@ -1,9 +1,10 @@
 # 🏪 Tienda Victoria — REST API
 
 ![Java](https://img.shields.io/badge/Java-17-orange?style=flat-square)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.4-brightgreen?style=flat-square&logo=springboot)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.4-brightgreen?style=flat-square&logo=springboot)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?style=flat-square&logo=mysql)
 ![JPA](https://img.shields.io/badge/JPA-Hibernate-59666C?style=flat-square&logo=hibernate)
+![Maven](https://img.shields.io/badge/Maven-3.9-C71A36?style=flat-square&logo=apachemaven)
 ![Status](https://img.shields.io/badge/Status-In%20Development-yellow?style=flat-square)
 
 REST API for customer management of Tienda Victoria, built with **Spring Boot**, **JPA/Hibernate** and **MySQL**.
@@ -512,6 +513,103 @@ INSERT INTO `cliente` (`nombre_cliente`, `apellido_cliente`, `tipo_documento`, `
 
 ---
 
+## ⚙️ Dependency Management — `pom.xml`
+
+This project uses **Maven** as its dependency manager. Below is the complete `pom.xml` with a description of each dependency.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Parent: inherits default Spring Boot configurations and plugin versions -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
+        <relativePath/>
+    </parent>
+
+    <!-- Project identification -->
+    <groupId>com.tienda</groupId>
+    <artifactId>victoria</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- Spring Web: enables REST controllers, HTTP request handling and embedded Tomcat -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Spring Data JPA: provides JpaRepository, entity mapping and Hibernate integration -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- MySQL Connector: JDBC driver to connect the app to MySQL database -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>  <!-- Only needed at runtime, not at compile time -->
+        </dependency>
+
+        <!-- DevTools: enables hot reload during development — changes apply without restarting -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>  <!-- Not included in the final build -->
+        </dependency>
+
+        <!-- Test: includes JUnit 5, Mockito and Spring Test for unit and integration testing -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>  <!-- Only available during test execution -->
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Spring Boot Maven Plugin: packages the app as an executable JAR -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+```
+
+### Dependency summary
+
+| Dependency | Version | Scope | Purpose |
+|------------|---------|-------|---------|
+| `spring-boot-starter-parent` | 3.2.4 | Parent | Base configuration and managed versions |
+| `spring-boot-starter-web` | Managed | Compile | REST controllers + embedded Tomcat |
+| `spring-boot-starter-data-jpa` | Managed | Compile | JPA + Hibernate ORM |
+| `mysql-connector-j` | Managed | Runtime | JDBC driver for MySQL |
+| `spring-boot-devtools` | Managed | Runtime | Hot reload in development |
+| `spring-boot-starter-test` | Managed | Test | JUnit 5 + Mockito |
+| `spring-boot-maven-plugin` | Managed | Build | Packages app as executable JAR |
+
+> 💡 **Managed versions** means the version is automatically handled by `spring-boot-starter-parent` — no need to specify it manually for each dependency.
+
+---
+
 ## 🚀 Getting Started
 
 ### 1. Clone the repository
@@ -554,7 +652,7 @@ Run → VictoriaApplication.java
 | Technology | Purpose |
 |------------|---------|
 | Java 17 | Programming language |
-| Spring Boot 4.0.4 | Main framework |
+| Spring Boot 3.2.4 | Main framework |
 | Spring Data JPA | Data access |
 | Hibernate | ORM |
 | MySQL 8.0 | Database |
