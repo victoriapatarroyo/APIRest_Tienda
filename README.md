@@ -8,7 +8,7 @@
 
 API REST para la gestión de clientes de la Tienda Victoria, desarrollada con **Spring Boot**, **JPA/Hibernate** y **MySQL**.
 
-> 🔗 **Repositorio:** [github.com/victoriapatarroyo/victoria](https://github.com/victoriapatarroyo/victoria)
+> 🔗 **Repositorio:** [github.com/victoriapatarroyo/APIRest_Tienda](https://github.com/victoriapatarroyo/APIRest_Tienda)
 
 ---
 
