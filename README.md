@@ -553,12 +553,128 @@ server.port=8080
 > | Valor | Comportamiento |
 > |-------|---------------|
 > | `create` | Elimina y recrea la tabla en cada arranque ⚠️ |
-> | `update` | Mantiene la tabla y solo aplica cambios nuevos ✅ |>
+> | `update` | Mantiene la tabla y solo aplica cambios nuevos ✅ |
 
 ### 4. Ejecutar desde IntelliJ IDEA
 ```
 Run → VictoriaApplication.java
 ```
+
+---
+
+## 🧪 Pruebas con Postman
+
+### Configuración previa
+Antes de comenzar, asegúrate de:
+- Tener la aplicación corriendo en `http://localhost:8080`
+- Tener Postman instalado
+
+### Cómo importar la colección en Postman
+
+1. Abre **Postman**
+2. Haz clic en el botón **Import** (esquina superior izquierda)
+3. Selecciona la opción **File**
+4. Busca y selecciona el archivo `postman/TiendaVictoria.postman_collection.json`
+5. Haz clic en **Import**
+6. La colección aparecerá en el panel izquierdo bajo **Collections** lista para usar
+
+---
+
+### Orden recomendado de pruebas
+
+Seguir este orden garantiza que cada prueba tenga los datos necesarios para ejecutarse correctamente.
+
+| # | Método | Endpoint | Qué valida |
+|---|--------|----------|------------|
+| 1 | `POST` | `/api/clientes` | Crear un cliente nuevo |
+| 2 | `GET` | `/api/clientes` | Listar todos los clientes |
+| 3 | `GET` | `/api/clientes/1` | Buscar el cliente recién creado |
+| 4 | `PUT` | `/api/clientes/1` | Actualizar sus datos |
+| 5 | `DELETE` | `/api/clientes/1` | Eliminarlo |
+| 6 | `GET` | `/api/clientes/1` | Confirmar que ya no existe (`404`) |
+
+---
+
+### Casos de prueba por endpoint
+
+#### ➕ POST `/api/clientes` — Crear cliente
+
+**Caso 1 ✅ — Creación exitosa**
+- Method: `POST`
+- URL: `http://localhost:8080/api/clientes`
+- Body → raw → JSON:
+```json
+{
+    "nombreCliente": "Juan",
+    "apellidoCliente": "Pérez",
+    "tipoDocumento": "CC",
+    "numeroDocumento": "123456789",
+    "telefonoCliente": "3001234567",
+    "correoCliente": "juan.perez@gmail.com"
+}
+```
+- Resultado esperado: `201 Created` + objeto con `idCliente` generado
+
+**Caso 2 ❌ — Body vacío**
+- Body: `{}`
+- Resultado esperado: `400 Bad Request`
+
+---
+
+#### 📋 GET `/api/clientes` — Listar todos
+
+**Caso 1 ✅ — Con registros**
+- Resultado esperado: `200 OK` + array con todos los clientes
+
+**Caso 2 ❌ — Sin registros**
+- Resultado esperado: `404 Not Found` + `"No hay clientes registrados"`
+
+---
+
+#### 🔍 GET `/api/clientes/{id}` — Buscar por ID
+
+**Caso 1 ✅ — ID existente**
+- URL: `http://localhost:8080/api/clientes/1`
+- Resultado esperado: `200 OK` + objeto del cliente
+
+**Caso 2 ❌ — ID inexistente**
+- URL: `http://localhost:8080/api/clientes/99`
+- Resultado esperado: `404 Not Found` + `"Cliente no encontrado con ID: 99"`
+
+---
+
+#### ✏️ PUT `/api/clientes/{id}` — Actualizar cliente
+
+**Caso 1 ✅ — Actualización exitosa**
+- URL: `http://localhost:8080/api/clientes/1`
+- Body → raw → JSON:
+```json
+{
+    "nombreCliente": "Juan",
+    "apellidoCliente": "García",
+    "tipoDocumento": "CC",
+    "numeroDocumento": "123456789",
+    "telefonoCliente": "3009876543",
+    "correoCliente": "juan.garcia@gmail.com"
+}
+```
+- Resultado esperado: `200 OK` + objeto actualizado
+
+**Caso 2 ❌ — ID inexistente**
+- URL: `http://localhost:8080/api/clientes/99`
+- Resultado esperado: `404 Not Found` + `"Error al actualizar cliente con ID: 99"`
+
+---
+
+#### 🗑️ DELETE `/api/clientes/{id}` — Eliminar cliente
+
+**Caso 1 ✅ — Eliminación exitosa**
+- URL: `http://localhost:8080/api/clientes/1`
+- Resultado esperado: `204 No Content`
+
+**Caso 2 ❌ — ID inexistente**
+- URL: `http://localhost:8080/api/clientes/99`
+- Resultado esperado: `404 Not Found` + `"Cliente no encontrado con ID: 99"`
 
 ---
 
