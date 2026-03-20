@@ -542,6 +542,19 @@ spring.jpa.properties.hibernate.format_sql=true
 server.port=8080
 ```
 
+> ⚠️ **Importante — solo la primera vez:**
+> La propiedad `spring.jpa.hibernate.ddl-auto=create` crea la tabla automáticamente al arrancar la aplicación.
+> Una vez que la tabla `cliente` ya fue creada en la base de datos, **cambia este valor a `update`** para evitar que Hibernate la elimine y recree en cada reinicio:
+>
+> ```properties
+> spring.jpa.hibernate.ddl-auto=update
+> ```
+>
+> | Valor | Comportamiento |
+> |-------|---------------|
+> | `create` | Elimina y recrea la tabla en cada arranque ⚠️ |
+> | `update` | Mantiene la tabla y solo aplica cambios nuevos ✅ |>
+
 ### 4. Ejecutar desde IntelliJ IDEA
 ```
 Run → VictoriaApplication.java
